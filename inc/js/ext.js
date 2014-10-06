@@ -69,11 +69,6 @@ $('li[data-readmore]').click(function(){
 
 
 
-$(document).on('click', 'a', function (event) {
-    event.preventDefault();
-    window.open($(this).attr('href'), '_system');
-    return false;
-});
 
 
 
