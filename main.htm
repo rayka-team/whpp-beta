@@ -17,7 +17,6 @@
 
 
 
-
 <style>
 ol.loading{
 	width:100%;
@@ -127,8 +126,7 @@ ol.loading{
 	   
 	   
 	   var query_cache=window.localStorage.getItem('query_cache');
-	   if(query_cache==""){
-		   if(!navigator.onLine){$('#disconect').fadeIn();}
+	   if(query_cache==null){
 		   $('.loading').show();
 		var url = 'http://www.hamyarwp.com/?json=1';
 		$.getJSON(url, function (json) {
@@ -143,9 +141,15 @@ ol.loading{
 			$('ul.rig').html(''); 
 		  $('ul.rig').append('<li><a href="content.htm?'+obj.id+'"><img src="'+obj.thumbnail_images+'"></a></li>');
 		 });
-		});
+		}).fail(function(){
+			myScroll.refresh();
+			$('#disconect').fadeIn(null,null,function(){
+				var timer=setTimeout(function(){
+					$('#disconect').fadeOut();
+					},3000);
+				});
+			});
 	   }else{
-    if(!navigator.onLine){$('#disconect').fadeIn();}
     var query_cache = JSON.parse(window.localStorage.getItem('query_cache'));
 	$('ul.rig').html(''); 
 		query_cache.forEach(function(obj) { 
