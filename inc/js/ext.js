@@ -66,6 +66,8 @@ $('li[data-readmore]').click(function(){
 });
 
 
+var online=navigator.onLine;
+if(!online){$('#disconect').fadeIn();}
 
 
 
