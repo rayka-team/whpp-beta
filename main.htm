@@ -137,7 +137,7 @@ ol.loading{
 		
 		
          var query_cache = JSON.parse(window.localStorage.getItem('query_cache'));
-		query_cache.forEach(function(obj) {
+		rayka.forEach(function(obj) {
 			$('ul.rig').html(''); 
 		  $('ul.rig').append('<li><a href="content.htm?'+obj.id+'"><img src="'+obj.thumbnail_images+'"></a></li>');
 		 });
