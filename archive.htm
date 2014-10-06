@@ -1,0 +1,267 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Main-HamyarWpApp</title>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+<script src="inc/js/jq.js"></script>
+<script src="inc/js/slide-menu.js"></script>
+<script src="inc/js/iscroll.js"></script>
+<script src="inc/js/cordova.js"></script>
+<script src="phonegap.js"></script>
+<script src="cordova.js"></script>
+<link href="inc/css/layout.css?55556" rel="stylesheet" type="text/css"/>
+<link href="inc/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="inc/css/gride.css" rel="stylesheet" type="text/css"/>
+
+
+</head>
+<body id="main">
+
+
+
+
+
+
+
+
+<!-- Mobile Header START -->
+<div class="mobile-header">
+<ul class="clearfloat"><li class="m-menu"> <a><span class="menu-open"><i class="fa fa-bars fa-2x"></i></span><span class="menu-close"><i class="fa fa-bars fa-2x"></i></span></a> </li>
+<li data-link="main.htm"><div id="minilogo"></div></li>
+<li class="Back" data-link="main.htm"><i class="fa fa-chevron-left fa-2x"></i></li>
+<li class="search" data-link="search.htm"><i class="fa fa-search fa-2x"></i></li>
+<li class="notification" data-link="notification.htm"><i class="fa fa-bell fa-2x"></i></li>
+</ul>
+</div>
+<!-- Mobile Header END -->
+
+<div id="container-outer"> 
+
+<!-- Mobile Menu START -->
+<div class="mobile-menu"> 
+</div>
+<!-- Mobile Menu END -->
+<div class="mobile-menu-bg">
+<ul class="menuconent">
+<li data-link="main.htm"> صفحه اصلی</li>
+<li data-link="register.htm" class="s"> رزرو رایگان</li>
+<li data-link="archive.htm?4"> قالب های رایگان</li>
+<li data-link="archive.htm?5"> کدهای رایگان</li>
+<li data-link="archive.htm?6"> پلاگین های رایگان</li>
+<li data-link="archive.htm?3092"> مقالات آموزشی</li>
+<li data-link="about.htm"> درباره ما</li>
+<li data-link="contact.htm"> تماس با ما</li>
+</ul>
+
+
+</div>
+</div>
+<!-- Full Site Container Outer End -->
+
+
+<div id="header"></div>
+<div id="wrapper">
+	<div id="scroller">
+		<div id="pullDown">
+			<span class="pullDownIcon"></span><span class="pullDownLabel">جهت بروز رسانی پایین بکشید...</span>
+		</div>
+
+        
+        
+        
+	<div class="container">
+
+<div id="three-columns" class="grid-container">
+			<ul class="rig columns-3">
+
+
+			</ul>
+		</div>
+		
+		
+	</div>        
+        
+        
+		<div id="pullUp">
+			<span class="pullUpIcon"></span><span class="pullUpLabel">جهت بروز رسانی بالا بکشید...</span>
+		</div>
+	</div>
+</div>
+<style>
+div.loading{
+	width:100%;
+	height:50px;
+	background:#FFF url(inc/img/ajax-loader.gif) no-repeat center;
+	border-bottom:1px solid #CCC;
+	}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<div id="disconect">متاسفانه اشکالی در اتصال اینترنتی موجود است !</div>
+<div id="Exitbody">
+<span>آیا واقعا قصد خروج از برنامه را دارید؟</span>
+<div align="center">
+<button onClick="cancel();" id="no">خیــر</button>
+<button onClick="goexit();" id="yes">بـلـه</button>
+</div>
+</div>
+<script>
+function cancel(){
+	$('#Exitbody').fadeOut("fast");
+	}
+
+function goexit(){
+	 console.log("in button");
+     navigator.app.exitApp();
+	}
+</script>
+
+
+
+
+<script src="inc/js/ext.js"></script>
+
+
+
+<script>
+var hjj=window.location.search;
+ss=hjj.split('?');
+ 
+ 
+var myScroll,
+	pullDownEl, pullDownOffset,
+	pullUpEl, pullUpOffset,
+	generatedCount = 0;
+	page=2;
+
+function pullDownAction () {
+			   if(!navigator.onLine){$('#disconect').fadeIn();}
+
+		var url = 'http://www.hamyarwp.com/?cat='+ss[1]+'&json=1';
+		$.getJSON(url, function (json) {
+		var rayka=json.posts;	
+		var dataToStore = JSON.stringify(rayka);
+        localStorage.setItem('query_cache'+ss[1], dataToStore);
+         var query_cache = JSON.parse(localStorage.getItem('query_cache'+ss[1]));
+		query_cache.forEach(function(obj) { 
+		  $('ul.rig').prepend('<li><a href="content.htm?'+obj.id+'"><img src="'+obj.thumbnail_images+'"></a></li>');
+		 });
+		 myScroll.refresh();
+		 page=1;
+		});
+
+}
+
+function pullUpAction () {
+			   if(!navigator.onLine){$('#disconect').fadeIn();}
+
+		var url = 'http://www.hamyarwp.com/?cat='+ss[1]+'&page='+page+'&json=1';
+		$.getJSON(url, function (json) {
+		var rayka=json.posts;	
+		rayka.forEach(function(obj) {
+		  $('ul.rig').append('<li><a href="content.htm?'+obj.id+'"><img src="'+obj.thumbnail_images+'"></a></li>');
+		 });
+		 myScroll.refresh();
+         page++;
+		});
+}
+
+function loaded() {
+	pullDownEl = document.getElementById('pullDown');
+	pullDownOffset = pullDownEl.offsetHeight;
+	pullUpEl = document.getElementById('pullUp');	
+	pullUpOffset = pullUpEl.offsetHeight;
+	
+	myScroll = new iScroll('wrapper', {
+		useTransition: true,
+		topOffset: pullDownOffset,
+		onRefresh: function () {
+			if (pullDownEl.className.match('loading')) {
+				pullDownEl.className = '';
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'جهت بروز رسانی پایین بکشید...';
+			} else if (pullUpEl.className.match('loading')) {
+				pullUpEl.className = '';
+				pullUpEl.querySelector('.pullUpLabel').innerHTML = 'جهت بروز رسانی بالا بکشید...';
+			}
+		},
+		onScrollMove: function () {
+			if (this.y > 5 && !pullDownEl.className.match('flip')) {
+				pullDownEl.className = 'flip';
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'درحال بروزرسانی...';
+				this.minScrollY = 0;
+			} else if (this.y < 5 && pullDownEl.className.match('flip')) {
+				pullDownEl.className = '';
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'جهت بروز رسانی پایین بکشید...';
+				this.minScrollY = -pullDownOffset;
+			} else if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+				pullUpEl.className = 'flip';
+				pullUpEl.querySelector('.pullUpLabel').innerHTML = 'درحال بروزرسانی...';
+				this.maxScrollY = this.maxScrollY;
+			} else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+				pullUpEl.className = '';
+				pullUpEl.querySelector('.pullUpLabel').innerHTML = 'جهت مشاهده موارد بیشتر بالا بکشید...';
+				this.maxScrollY = pullUpOffset;
+			}
+		},
+		onScrollEnd: function () {
+			if (pullDownEl.className.match('flip')) {
+				pullDownEl.className = 'loading';
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'بارگزاری...';				
+				pullDownAction();	// Execute custom function (ajax call?)
+			} else if (pullUpEl.className.match('flip')) {
+				pullUpEl.className = 'loading';
+				pullUpEl.querySelector('.pullUpLabel').innerHTML = 'بارگزاری...';				
+				pullUpAction();	// Execute custom function (ajax call?)
+			}
+		}
+	});
+	
+	setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
+}
+
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
+
+ 
+ 
+       
+	   
+	   
+	   //$('.container').html('<div class="loading"></div>');
+		var url = 'http://www.hamyarwp.com/?cat='+ss[1]+'&json=1';
+		if(!navigator.onLine){$('#disconect').fadeIn();}
+		$.getJSON(url, function (json) {
+			//$('.loading').slideUp();
+		var rayka=json.posts;	
+		//var dataToStore = JSON.stringify(rayka);
+        //localStorage.setItem('query_cache'+ss[1], dataToStore);
+		
+		
+         //var query_cache = JSON.parse(localStorage.getItem('query_cache'+ss[1]));
+		rayka.forEach(function(obj) { 
+		  $('ul.rig').append('<li><a href="content.htm?'+obj.id+'"><img src="'+obj.thumbnail_images+'"></a></li>');
+		 });
+		});
+		
+	
+	
+	
+</script>
+
+
+
+
+</body>
+</html>
+<div id="disconect">متاسفانه اشکالی در اتصال اینترنتی موجود است !</div>

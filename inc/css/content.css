@@ -1,0 +1,76 @@
+
+
+
+
+
+#thelist li{
+	margin:20px;
+	}
+
+#thelist li img{
+	height:auto;
+	width:100%;
+	background:#000;
+	margin-top:10px;
+	}
+
+#thelist li h2{
+	width:100%;
+	text-align:right;
+	direction:rtl;
+	font:11px tahoma;
+	margin-bottom:20px;
+	font-family:'yekan';
+	font-weight:700;
+	font-size:16px;
+	}
+
+
+
+#scroller ul {
+	list-style:none;
+	padding:0;
+	margin:0;
+	width:100%;
+	text-align:left;
+}
+
+#scroller li {
+	line-height:40px;
+	background:#FFF;
+	font-size:14px;
+	margin:0;
+}
+
+#scroller li div.content {
+	margin:20px 40px 20px 40px;
+	text-align:right;
+	direction:rtl;
+}
+
+
+
+	
+	
+	
+	
+	
+@media (min-width: 800px) and (max-width: 1800px) {
+	#scroller li{
+	/*width:calc(33.33333333% - 22px);*/
+	width:100%;
+	display:inline-table;
+	}
+}	
+@media (min-width: 450px) and (max-width: 800px) {
+	#scroller li{
+	/*width:calc(33.33333333% - 22px);*/
+	width:100%;
+	display:inline-table;
+	}
+}	
+	
+	
+	
+	
+	

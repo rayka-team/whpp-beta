@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Main-HamyarWpApp</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<script src="inc/js/jq.js"></script>
+<script src="inc/js/slide-menu.js"></script>
+<script src="inc/js/iscroll.js"></script>
+<script src="phonegap.js"></script>
+<script src="cordova.js"></script>
+<link href="inc/css/layout.css?55556" rel="stylesheet" type="text/css"/>
+<link href="inc/css/content.css" rel="stylesheet" type="text/css"/>
+<link href="inc/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+
+</head>
+<body id="main">
+
+
+
+
+
+
+
+
+<!-- Mobile Header START -->
+<div class="mobile-header">
+<ul class="clearfloat"><li class="m-menu"> <a><span class="menu-open"><i class="fa fa-bars fa-2x"></i></span><span class="menu-close"><i class="fa fa-bars fa-2x"></i></span></a> </li>
+<li data-link="main.htm"><div id="minilogo"></div></li>
+<li class="Back" data-link="main.htm"><i class="fa fa-chevron-left fa-2x"></i></li>
+<li class="search" data-link="search.htm"><i class="fa fa-search fa-2x"></i></li>
+<li class="notification"><i class="fa fa-bell fa-2x"></i></li>
+</ul>
+</div>
+<!-- Mobile Header END -->
+
+<div id="container-outer"> 
+
+<!-- Mobile Menu START -->
+<div class="mobile-menu"> 
+</div>
+<!-- Mobile Menu END -->
+<div class="mobile-menu-bg">
+<ul class="menuconent">
+<li data-link="main.htm"> صفحه اصلی</li>
+<li data-link="register.htm" class="s"> رزرو رایگان</li>
+<li data-link="archive.htm?4"> قالب های رایگان</li>
+<li data-link="archive.htm?5"> کدهای رایگان</li>
+<li data-link="archive.htm?6"> پلاگین های رایگان</li>
+<li data-link="archive.htm?3092"> مقالات آموزشی</li>
+<li data-link="about.htm"> درباره ما</li>
+<li data-link="contact.htm"> تماس با ما</li>
+</ul>
+
+
+</div>
+</div>
+<!-- Full Site Container Outer End -->
+
+
+<div id="header"></div>
+<div id="wrapper">
+	<div id="scroller">
+
+		<ul id="thelist">
+        
+        	<li id="Content">
+            
+            <div class="content">
+            <h2>درباره تیم همیار وردپرس</h2>
+            
+            
+            
+              اواخر بهار سال ۹۰ ! وقتی داشتم برای چندمین بار توی wordpress.org دنبال توابع وردپرس میگشتم تا کار طراحی قالب وردپرس یکی دیگه از مشتریام رو تکمیل کنم به این فکر افتادم کاش یه منبع فارسی بود که کد ها رو داخلش داشت و طراحا میتونستند ازش استفاده کنند.
+              
+              اون موقع یک سایت فارسی به نام wp-tools بود که متاسفانه فعالیت چندانی نداشت و من تصمیم گرفتم صرفا یک محیطی درست کنم برای به اشتراک گذاشتن کدهایی که روزانه باهاشون سر و کله میزنم و این شد که سایت همیار وردپرس رو افتتاح کردم!
+              از انتخاب اسم کاملا مشخص بود همیار وردپرس نمیخواد جای کس دیگه رو بگیره و با وجود کلمه همیار، مشخص بود، هدف، گسترش و فرهنگ سازی بیشتر وردپرس بین فارسی زبان ها است و چون توی سایت وردپرس فارسی چنین آموزش هایی (اموزش هیا کدنویسی قالب وردپرس ) کمبودش حس میشد، زندگی همیار وردپرس با یک برنامه سبک شروع شد!
+              با توجه به فعالیت منظم سایت همیار وردپرس مخاطبانی رو به سمت خودش کشید و با پیشنهاد و کمک کاربران نسخه های آزمایشی اون رو عرضه کردیم و دو قسمت افزونه وردپرس و پوسته وردپرس رو طی یک سال و نیم اول به برنامه فعالیت افزودیم.            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            </div>
+            </li>
+			</ul>
+		
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+var hjj=window.location.search;
+ss=hjj.split('?');
+
+var postDetals=window.localStorage.getItem("post"+ss[1]);
+if(postDetals==null){
+
+
+//$('body').html(ss[1]);
+
+var url = 'http://localhost/wp/?p='+ss[1]+'&json=1';
+$.getJSON(url, function (json) {
+var rayka=json.post;	
+//$('#amir').append(json.status);
+$('#Content').append('<div>'+rayka.title+'</div>');
+$('#Content').append('<div>'+rayka.content+'</div>');
+var dataToStore = JSON.stringify(json);
+
+window.localStorage.setItem("post"+ss[1],dataToStore); 
+});
+
+}else{
+var localData = JSON.parse(postDetals);
+var rayka=localData.post;	
+//$('#amir').append(json.status);
+//$('#Content').append('<div>'+rayka.title+'</div>');
+//$('#Content').append('<div>'+rayka.content+'</div>');	
+	
+	
+	
+	}
+
+</script>
+
+
+
+
+
+
+<script>
+var myScroll,
+	pullDownEl, pullDownOffset,
+	pullUpEl, pullUpOffset,
+	generatedCount = 0;
+
+function loaded() {	
+	myScroll = new iScroll('wrapper', {});
+	
+	setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 100);
+}
+
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 100); }, false);
+</script>
+<script src="inc/js/ext.js"></script>
+
+</body>
+</html>
+<div id="disconect">متاسفانه اشکالی در اتصال اینترنتی موجود است !</div>
