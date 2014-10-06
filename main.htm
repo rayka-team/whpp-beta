@@ -7,8 +7,6 @@
 <script src="inc/js/jq.js"></script>
 <script src="inc/js/slide-menu.js"></script>
 <script src="inc/js/iscroll.js"></script>
-<script src="phonegap.js"></script>
-<script src="cordova.js"></script>
 <link href="inc/css/layout.css?55556" rel="stylesheet" type="text/css"/>
 <link href="inc/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="inc/css/gride.css" rel="stylesheet" type="text/css"/>
@@ -114,31 +112,6 @@ ol.loading{
 <button onClick="goexit();" id="yes">بـلـه</button>
 </div>
 </div>
-<script>
-function cancel(){
-	$('#Exitbody').fadeOut("fast");
-	}
-
-function goexit(){
-	 console.log("in button");
-     navigator.app.exitApp();
-	}
-	
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    function onDeviceReady() {
-        document.addEventListener("backbutton", onBackKeyDown, false);
-		document.addEventListener("menubutton", onMenuKeyDown, false);
-		document.addEventListener("searchbutton", onSearchKeyDown, false);
-    }
-
-   
-    function onBackKeyDown() {
-		$('#Exitbody').fadeIn("fast");
-	
-    }	
-	
-</script>
 
 
 
