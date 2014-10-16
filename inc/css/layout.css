@@ -114,7 +114,7 @@ width: 50px;
 }
 
 .mobile-header ul li:active{
-	background:#099;
+	/*background:#099;*/
 	}
 .mobile-header ul li.Back {
 float: left;
