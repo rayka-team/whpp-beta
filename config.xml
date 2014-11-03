@@ -29,7 +29,7 @@
     <gap:plugin name="org.apache.cordova.network-information" />
 	<gap:plugin name="org.apache.cordova.inappbrowser" />
 
-<access origin="*" />	
+     <access origin="*" />	
 
 </widget>
 
