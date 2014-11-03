@@ -24,6 +24,7 @@
 	
     <gap:plugin name="org.apache.cordova.device-orientation" />
     <gap:plugin name="org.apache.cordova.network-information" />
+	<gap:plugin name="org.apache.cordova.inappbrowser" />
 
    <access origin="*"/>	
 	
